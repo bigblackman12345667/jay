@@ -1,34 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitHub Link IP Logger</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+        // Redirect the user as soon as the page loads
+        window.location.href = "https://www.example.com"; // Replace with your desired URL
+    </script>
 </head>
 <body>
-  <h1>Click on the GitHub Link Below</h1>
-  <a href="https://github.com/your-username/your-repo" id="github-link">GitHub Repository</a>
-
-  <script>
-    document.getElementById('github-link').addEventListener('click', function(e) {
-      // Prevent the default behavior of the link (so the page doesn't reload)
-      e.preventDefault();
-
-      // Send a request to your server to log the IP and send it to Discord
-      fetch('/log-ip', {
-        method: 'POST',
-      })
-      .then(response => response.text())
-      .then(data => {
-        alert('IP Logged Successfully!'); // Show success message
-        // After logging the IP, redirect the user to the GitHub link
-        window.location.href = "https://github.com/your-username/your-repo"; // Redirect after logging IP
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('Error logging IP');
-      });
-    });
-  </script>
+    <h1>Redirecting...</h1>
+    <p>If you are not redirected automatically, click the link below:</p>
+    <a href="https://www.example.com">Go to the website now</a> <!-- Replace with your desired URL -->
 </body>
 </html>
