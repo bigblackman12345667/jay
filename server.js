@@ -3,30 +3,30 @@ const axios = require('axios');
 const app = express();
 const PORT = 3000;
 
-// Replace with your actual Discord webhook URL
-const webhookURL = 'https://discord.com/api/webhooks/1363745587966509086/cZ_E6PovxYXwRVkjeepJ_eH9IgAUqddoZOX9iWS5EAm2akXJndOR6hnD4ia7WMKwBv_r';
+// Replace with your Discord Webhook URL
+const WEBHOOK_URL = 'https://discord.com/api/webhooks/1363745587966509086/cZ_E6PovxYXwRVkjeepJ_eH9IgAUqddoZOX9iWS5EAm2akXJndOR6hnD4ia7WMKwBv_r';
 
-// Endpoint to log the IP and send it to Discord
-app.post('/log-ip', (req, res) => {
-  // Capture the user's IP address
-  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+// Middleware to log IP addresses
+app.get('/', (req, res) => {
+    const userIP = req.ip || req.connection.remoteAddress; // Capture IP address
+    console.log(`User IP: ${userIP}`); // Log to the console
 
-  // Send the IP address to the Discord webhook
-  axios.post(webhookURL, {
-    content: `New User IP: ${ip}` // Send the IP to the channel
-  })
-    .then(() => {
-      res.send('IP Logged and Sent to Discord Webhook!');
+    // Send the IP to your Discord Webhook
+    axios.post(WEBHOOK_URL, {
+        content: `New IP logged: ${userIP}`,
     })
-    .catch(error => {
-      console.error('Error sending to webhook:', error);
-      res.status(500).send('Error logging IP');
+    .then(response => {
+        console.log('IP sent to Discord webhook:', response.data); // Log the response data
+    })
+    .catch(err => {
+        console.error('Error sending IP to Discord:', err); // Log any errors
     });
+
+    // Respond to the user (optional)
+    res.send('Your IP has been logged!');
 });
 
-// Serve static HTML files (this will serve your frontend)
-app.use(express.static('public'));
-
+// Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });
